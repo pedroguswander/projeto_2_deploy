@@ -24,7 +24,7 @@ jobs:
 
       - name: Cleaning testing files
         run: |
-          cd software_g17/
+          cd projeto_django/software_g17/
           rm db.sqlite3
           rm .env
           cd ..
