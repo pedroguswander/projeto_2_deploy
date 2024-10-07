@@ -9,8 +9,14 @@ def login_view(request) :
         usuario = authenticate(request, username=username, password=password)
         if usuario is not None:
             login(request, usuario)
-            return redirect('login')
+            return redirect('home')
     return render(request, 'estoque/login.html')
 
 def cadastro_view(request) :
     pass
+
+def home_view(request) :
+    qnt_materias = 0
+    fantoches = 0
+    context = {"qnt_materias" : qnt_materias, "fantoches" : fantoches}
+    return render(request, 'estoque/home.html', context)
