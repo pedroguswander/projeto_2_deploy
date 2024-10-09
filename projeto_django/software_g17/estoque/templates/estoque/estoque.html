@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+</head>
+<body>
+    <h1>Nível de estoque:</h1>
+
+    <ul>
+        {% for material in materiais %}
+        <li>{{material}}:</li>
+        <li>Itens encontrados no estoque: {{material.quantidade}}</li>
+        <li>Preço por Item : {{material.preco}}</li>
+        <br>
+        {% empty %}
+
+        {% endfor %}
+    </ul>
+    <h2>Registrar novo material</h2>
+    <form method="post">
+        {% csrf_token %}
+        <p>Material:</p>
+        <input type="text" name="material">
+        <p>Quantidade:</p>
+        <input type="number" min="0" name="quantidade">
+        <p>Preço:</p>
+        <input type="number" step="0.01" min="0" name="preco">
+        <button type="submit">Submeter</button>
+    </form>
+</body>
+</html>
