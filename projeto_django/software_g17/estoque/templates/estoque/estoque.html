@@ -12,7 +12,9 @@
         {% for material in materiais %}
         <li>{{material}}:</li>
         <li>Itens encontrados no estoque: {{material.quantidade}}</li>
-        <li>Preço por Item : {{material.preco}}</li>
+        <li>Preço por Item: {{material.preco}} R$</li>
+        <li>Valor total do estoque: {{material.valor}} R$</li>
+        <li>Data de entrada: {{material.date_added}} </li>
         <br>
         {% empty %}
 
@@ -22,11 +24,11 @@
     <form method="post">
         {% csrf_token %}
         <p>Material:</p>
-        <input type="text" name="material">
+        <input type="text" name="material" required>
         <p>Quantidade:</p>
-        <input type="number" min="0" name="quantidade">
+        <input type="number" min="0" name="quantidade" required>
         <p>Preço:</p>
-        <input type="number" step="0.01" min="0" name="preco">
+        <input type="number" step="0.01" min="0" name="preco" required>
         <button type="submit">Submeter</button>
     </form>
 </body>

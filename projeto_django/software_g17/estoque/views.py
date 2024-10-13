@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login
-from .models import Material
+from .models import Material, Brinquedo, material_de_um_brinquedo
 
 def login_view(request) :
     if request.method == 'POST':
@@ -22,6 +22,29 @@ def home_view(request) :
     context = {"qnt_materias" : qnt_materias, "fantoches" : fantoches}
     return render(request, 'estoque/home.html', context)
 
+def brinquedos_view(request) :
+    brinquedos = Brinquedo.objects.all()
+    material_brinquedo = material_de_um_brinquedo.objects.all()
+    context = {"brinquedos" : brinquedos, "material_brinquedo" : material_brinquedo} 
+    return render(request, 'estoque/brinquedos.html', context)
+
+def brinquedos_cadastro_view(request) :
+    if request.method == 'POST':
+
+        if request.POST.get('registro_brinquedo') == 'brinquedo':
+            brinquedo = request.POST.get('brinquedo')
+            descricao = request.POST.get('descricao')
+            passo_a_passo = request.POST.get('passo a passo')
+
+        elif request.POST.get('registro_material') == 'material':
+            material = request.POST.get('material')
+            quantidade = request.POST.get('quantidade')
+
+        return redirect('brinquedos')
+    
+    return render(request, 'estoque/brinquedos_cadastro.html')
+
+
 def estoque_view(request) :
     if request.method == 'POST' :
         material = request.POST.get('material')
@@ -29,14 +52,18 @@ def estoque_view(request) :
         preco = request.POST.get('preco')
         #date_added = request.POST.get('preco')
 
-        M = Material(
+        m = Material(
             material = material,
             quantidade = quantidade,
             preco = preco,
         )
-        M.save()
+
+        m.save()
 
     materiais = Material.objects.all()
+
+    for material in materiais :
+        material.valor = material.quantidade * material.preco
 
     context = {'materiais' : materiais}
 
