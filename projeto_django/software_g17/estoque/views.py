@@ -50,12 +50,13 @@ def estoque_view(request) :
         material = request.POST.get('material')
         quantidade = request.POST.get('quantidade')
         preco = request.POST.get('preco')
-        #date_added = request.POST.get('preco')
+        date_added = request.POST.get('date_added')
 
         m = Material(
             material = material,
             quantidade = quantidade,
             preco = preco,
+            date_added = date_added
         )
 
         m.save()
