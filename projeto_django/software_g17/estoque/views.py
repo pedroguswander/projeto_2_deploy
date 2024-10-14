@@ -24,8 +24,7 @@ def home_view(request) :
 
 def brinquedos_view(request) :
     brinquedos = Brinquedo.objects.all()
-    material_brinquedo = material_de_um_brinquedo.objects.all()
-    context = {"brinquedos" : brinquedos, "material_brinquedo" : material_brinquedo} 
+    context = {'brinquedos' : brinquedos}
     return render(request, 'estoque/brinquedos.html', context)
 
 def brinquedos_cadastro_view(request) :
@@ -44,18 +43,24 @@ def brinquedos_cadastro_view(request) :
     
     return render(request, 'estoque/brinquedos_cadastro.html')
 
+def brinquedo_view(request, brinquedo_id) :
+    brinquedo = Brinquedo.objects.get(id = brinquedo_id)
+    materiais = material_de_um_brinquedo.objects.filter(brinquedo = brinquedo)
+    context = {'brinquedo' : brinquedo, 'materiais' : materiais}
+    return render(request, 'estoque/brinquedo.html', context)
 
 def estoque_view(request) :
     if request.method == 'POST' :
         material = request.POST.get('material')
         quantidade = request.POST.get('quantidade')
         preco = request.POST.get('preco')
-        #date_added = request.POST.get('preco')
+        date_added = request.POST.get('date_added')
 
         m = Material(
             material = material,
             quantidade = quantidade,
             preco = preco,
+            date_added = date_added
         )
 
         m.save()
