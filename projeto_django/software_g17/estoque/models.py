@@ -9,7 +9,7 @@ class Brinquedo(models.Model) :
         return self.brinquedo
 
 class material_de_um_brinquedo(models.Model) :
-    brinquedo = models.ForeignKey(Brinquedo, on_delete=models.CASCADE, related_name='Brinquedo')
+    brinquedo = models.ForeignKey(Brinquedo, on_delete=models.CASCADE, related_name='Brinquedo', null=True)
     material = models.CharField(max_length=20)
     quantidade = models.IntegerField()
 

@@ -27,21 +27,36 @@ def brinquedos_view(request) :
     context = {'brinquedos' : brinquedos}
     return render(request, 'estoque/brinquedos.html', context)
 
+
 def brinquedos_cadastro_view(request) :
+    materiais = Material.objects.all()
+
     if request.method == 'POST':
+        brinquedo = request.POST.get('brinquedo')
+        descricao = request.POST.get('descricao')
+        passo_a_passo = request.POST.get('passo a passo')
 
-        if request.POST.get('registro_brinquedo') == 'brinquedo':
-            brinquedo = request.POST.get('brinquedo')
-            descricao = request.POST.get('descricao')
-            passo_a_passo = request.POST.get('passo a passo')
+        b = Brinquedo(
+            brinquedo = brinquedo,
+            descricao = descricao,
+            passo_a_passo = passo_a_passo,
+        )
+        b.save()
 
-        elif request.POST.get('registro_material') == 'material':
-            material = request.POST.get('material')
-            quantidade = request.POST.get('quantidade')
+        for material in materiais :
+            if request.POST.get(str(material)) == 'on' :
+                
+                m = material_de_um_brinquedo(
+                    brinquedo = b,
+                    material = material,
+                    quantidade = 5,
+                )
+                m.save()
 
         return redirect('brinquedos')
     
-    return render(request, 'estoque/brinquedos_cadastro.html')
+    context = {'materiais': materiais}
+    return render(request, 'estoque/brinquedos_cadastro.html', context)
 
 def brinquedo_view(request, brinquedo_id) :
     brinquedo = Brinquedo.objects.get(id = brinquedo_id)
@@ -60,7 +75,7 @@ def estoque_view(request) :
             material = material,
             quantidade = quantidade,
             preco = preco,
-            date_added = date_added
+            date_added = date_added,
         )
 
         m.save()

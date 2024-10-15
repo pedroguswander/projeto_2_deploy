@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de brinquedos</title>
+</head>
+<body>
+    <h1>Registre um brinquedo:</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Brinquedo:</p>
+        <input type="text" name="brinquedo" >
+        <p>Descricao:</p>
+        <textarea name="descricao" id="descricao" rows="4" ></textarea>
+        <p>Passo a passo:</p>
+        <textarea name="passo a passo" id="passo a passo" rows="16" ></textarea>
+        <p>Materiais:</p>
+        <ul>
+            {% for material in materiais %}
+                <li><label for="material">{{material}}</label>
+                <input type="checkbox" id="material" name="{{ material }}"></li>
+                
+            {% empty %}
+
+            {% endfor %}
+        </ul>
+        <button type="submit" name="registro_brinquedo" value="brinquedo">Registrar brinquedo</button>
+    </form>
+</body>
+</html>
