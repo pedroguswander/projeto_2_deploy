@@ -16,21 +16,22 @@
 <body>
     <h1>Brinquedo</h1>
     <ul>
-    <div class="brinquedo">
-        <li>Brinquedo: {{brinquedo}}</li>
-        <li>Descricao: {{brinquedo.descricao}}</li>
-        <li>Passo a passo: {{brinquedo.passo_a_passo}}</li>
-        <h2>Materiais:</h2>
-        <div class="materiais">
-        {% for mb in materiais %}
-            <ul>
-                <li>{{mb.material}} {{mb.quantidade}}</li>
-            </ul>
-        {% empty %}
-
-        {% endfor %}
+        <div class="brinquedo">
+            <li>Brinquedo: {{brinquedo.brinquedo}}</li>
+            <li>Descrição: {{brinquedo.descricao}}</li>
+            <li>Passo a passo: {{brinquedo.passo_a_passo}}</li>
+            <h2>Materiais:</h2>
+            <div class="materiais">
+                {% for mb in materiais %}
+                    <ul>
+                        <li>{{mb.material}} - Quantidade: {{mb.quantidade}}</li>
+                    </ul>
+                {% empty %}
+                    <p>Sem materiais associados a este brinquedo.</p>
+                {% endfor %}
+            </div>
         </div>
-    </div>
     </ul>
 </body>
+
 </html>

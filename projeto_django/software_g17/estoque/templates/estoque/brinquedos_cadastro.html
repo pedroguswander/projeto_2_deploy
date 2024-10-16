@@ -18,12 +18,14 @@
         <p>Materiais:</p>
         <ul>
             {% for material in materiais %}
-                <li><label for="material">{{material}}</label>
-                <input type="checkbox" id="material" name="{{ material }}"></li>
-                
-            {% empty %}
-
-            {% endfor %}
+            <div>
+                <label>
+                    <input type="checkbox" name="material_{{material.id}}">
+                    {{material.material}} 
+                </label>
+                <input type="number" name="quantidade_{{material.id}}" min="1" placeholder="Quantidade">
+            </div>
+        {% endfor %}
         </ul>
         <button type="submit" name="registro_brinquedo" value="brinquedo">Registrar brinquedo</button>
     </form>

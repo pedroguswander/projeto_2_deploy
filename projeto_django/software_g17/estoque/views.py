@@ -43,15 +43,16 @@ def brinquedos_cadastro_view(request) :
         )
         b.save()
 
-        for material in materiais :
-            if request.POST.get(str(material)) == 'on' :
-                
-                m = material_de_um_brinquedo(
-                    brinquedo = b,
-                    material = material,
-                    quantidade = 5,
-                )
-                m.save()
+        for material in materiais:
+            if request.POST.get(f'material_{material.id}') == 'on':
+                quantidade = request.POST.get(f'quantidade_{material.id}')
+                if quantidade:
+                    m = material_de_um_brinquedo(
+                        brinquedo=b,
+                        material=material.material,
+                        quantidade=int(quantidade),
+                    )
+                    m.save()
 
         return redirect('brinquedos')
     
