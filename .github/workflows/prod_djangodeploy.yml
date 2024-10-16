@@ -40,7 +40,7 @@ jobs:
         run: |
           cd projeto_django/software_g17/
           zip release.zip ./* -r
-          mv software_g17/release.zip .
+          mv release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
