@@ -24,7 +24,7 @@ jobs:
 
       - name: Cleaning testing files
         run: |
-          cd projeto_django/software_g17/
+          cd projeto_django/
           
       - name: Create and start virtual environment
         run: |
@@ -32,16 +32,16 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r projeto_django/software_g17/requirements.txt
+        run: pip install -r projeto_django/requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
         run: |
-          cd projeto_django/software_g17/
+          cd projeto_django/
           zip release.zip ./* -r
           cd ..
-          mv projeto_django/software_g17/release.zip .
+          mv projeto_django/release.zip .
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
