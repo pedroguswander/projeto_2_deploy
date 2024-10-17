@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'design.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'brinquedos' %}">Brinquedos</a>
+            <a href="{% url 'estoque' %}">Materiais</a>
+            <a href="#">Clientes</a>
+        </nav>
+    </header>
+    <h1>Nível de estoque:</h1>
+
+    <ul>
+        {% for material in materiais %}
+        <li>{{material}}:</li>
+        <li>Itens encontrados no estoque: {{material.quantidade}}</li>
+        <li>Preço por Item: {{material.preco}} R$</li>
+        <li>Valor total do estoque: {{material.valor}} R$</li>
+        <li>Data de entrada: {{material.date_added}} </li>
+        <br>
+        {% empty %}
+
+        {% endfor %}
+    </ul>
+    <h2>Registrar novo material</h2>
+    <form method="post">
+        {% csrf_token %}
+        <p>Material:</p>
+        <input type="text" name="material" required>
+        <p>Quantidade:</p>
+        <input type="number" min="0" name="quantidade" required>
+        <p>Preço:</p>
+        <input type="number" step="0.01" min="0" name="preco" required>
+        <input type="datetime-local" name="date_added" required>
+        <button type="submit">Submeter</button>
+    </form>
+</body>
+</html>

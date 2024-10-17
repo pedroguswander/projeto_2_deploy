@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de brinquedos</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'design.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'brinquedos' %}">Brinquedos</a>
+            <a href="{% url 'estoque' %}">Materiais</a>
+            <a href="#">Clientes</a>
+        </nav>
+    </header>
+    <h1>Registre um brinquedo:</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Brinquedo:</p>
+        <input type="text" name="brinquedo" >
+        <p>Descricao:</p>
+        <textarea name="descricao" id="descricao" rows="4" ></textarea>
+        <p>Passo a passo:</p>
+        <textarea name="passo a passo" id="passo a passo" rows="16" ></textarea>
+        <p>Materiais:</p>
+        <ul>
+            {% for material in materiais %}
+            <div>
+                <label>
+                    <input type="checkbox" name="material_{{material.id}}">
+                    {{material.material}} 
+                </label>
+                <input type="number" name="quantidade_{{material.id}}" min="1" placeholder="Quantidade">
+            </div>
+        {% endfor %}
+        </ul>
+        <button type="submit" name="registro_brinquedo" value="brinquedo">Registrar brinquedo</button>
+    </form>
+</body>
+</html>

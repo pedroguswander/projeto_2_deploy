@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brinquedo</title>
+    <style>
+        .brinquedos {
+            border: 2px solid gray;
+        }
+        .materiais {
+            border: 2px solid gainsboro;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'design.css' %}">
+</head>
+<body>
+    <h1>Brinquedo</h1>
+    <ul>
+        <div class="brinquedo">
+            <li>Brinquedo: {{brinquedo.brinquedo}}</li>
+            <li>Descrição: {{brinquedo.descricao}}</li>
+            <li>Passo a passo: {{brinquedo.passo_a_passo}}</li>
+            <h2>Materiais:</h2>
+            <div class="materiais">
+                {% for mb in materiais %}
+                    <ul>
+                        <li>{{mb.material}} - Quantidade: {{mb.quantidade}}</li>
+                    </ul>
+                {% empty %}
+                    <p>Sem materiais associados a este brinquedo.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </ul>
+</body>
+
+</html>
