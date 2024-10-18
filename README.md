@@ -6,3 +6,4 @@ Para o grupo 17 da disciplina de projeto 2
   - <a href="https://docs.google.com/document/d/1u5mceD4fiH91HC_gPHEjvZ7Q35DYXtrxSPeo2snKbt4/edit?usp=sharing">Programação em par</a>
   - <a href="https://djangodeploy-d5cub5dmdwgxa4e9.brazilsouth-01.azurewebsites.net">Site</a>
   - <a href="https://youtu.be/0-bZMzM-L-Y">Screencast - Uso do sistema</a>
+  - <a href="https://youtu.be/uBusY2mXmgk?feature=shared">Screencast - Prortótipo Lo-Fi</a>
