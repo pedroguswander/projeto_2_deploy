@@ -60,9 +60,15 @@ def brinquedos_cadastro_view(request) :
     return render(request, 'estoque/brinquedos_cadastro.html', context)
 
 def brinquedo_view(request, brinquedo_id) :
+    preco_total = 0
+
     brinquedo = Brinquedo.objects.get(id = brinquedo_id)
     materiais = material_de_um_brinquedo.objects.filter(brinquedo = brinquedo)
-    context = {'brinquedo' : brinquedo, 'materiais' : materiais}
+    for material in materiais :
+        preco_total += material.quantidade * Material.objects.get(material = material).preco
+
+    
+    context = {'brinquedo' : brinquedo, 'materiais' : materiais, 'preco_total' : preco_total}
     return render(request, 'estoque/brinquedo.html', context)
 
 def estoque_view(request) :
