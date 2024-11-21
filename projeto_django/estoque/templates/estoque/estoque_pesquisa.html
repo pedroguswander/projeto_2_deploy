@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'design.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'brinquedos' %}">Brinquedos</a>
+            <a href="{% url 'estoque' %}">Materiais</a>
+            <a href="#">Clientes</a>
+        </nav>
+    </header>
+
+    {% if material_filtrado %}
+        <li>{{material_filtrado}}:</li>
+        <li>Itens encontrados no estoque: {{material_filtrado.quantidade}}</li>
+        <li>Preço por Item: {{material_filtrado.preco}} R$</li>
+        <li>Valor total do estoque: {{material_filtrado.valor}} R$</li>
+        <li>Data de entrada: {{material_filtrado.date_added}} </li>
+    {% endif %}
+</body>
+</html>

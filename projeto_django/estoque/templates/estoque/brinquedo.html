@@ -32,7 +32,17 @@
                     <p>Sem materiais associados a este brinquedo.</p>
                 {% endfor %}
             </div>
-            <p>Custo de produção {{ preco_total }}</p>
+            {% if not pode_produzir %} 
+                <p>Não é possível produzir o brinquedo</p><p>Custo de produção {{ preco_total }}</p>
+                {% for faltam in faltando %}
+                    <ul>
+                        <li>{{ faltam }}</li>
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <p>Custo de produção {{ preco_total }}</p>
+                <button type="submit" name="registro_brinquedo" value="brinquedo">Verificar produção</button>
+            {% endif %}
         </div>
     </ul>
 </body>
