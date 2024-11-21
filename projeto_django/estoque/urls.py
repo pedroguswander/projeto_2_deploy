@@ -11,4 +11,5 @@ urlpatterns = [
     path('brinquedo/<brinquedo_id>/', brinquedo_view, name='brinquedo'),
     path('estoque/', estoque_view, name='estoque'),
     path('estoque_pesquisa/<material_id>/', estoque_pesquisa_view, name='estoque_pesquisa'),
+    path('estoque_adicionar/', estoque_adicionar_view, name='estoque_adicionar'),
 ]

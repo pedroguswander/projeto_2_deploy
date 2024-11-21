@@ -93,21 +93,6 @@ def estoque_view(request) :
             except Material.DoesNotExist:
                 error_message = 'Material não encontrado!'
             
-        if request.POST.get("registrar_material") == "registrar_material":
-            material = request.POST.get('material')
-            quantidade = request.POST.get('quantidade')
-            preco = request.POST.get('preco')
-            date_added = request.POST.get('date_added')
-
-            m = Material(
-                material = material,
-                quantidade = quantidade,
-                preco = preco,
-                date_added = date_added,
-            )
-
-            m.save()
-
     materiais = Material.objects.all()
 
     for material in materiais :
@@ -120,3 +105,25 @@ def estoque_view(request) :
 def estoque_pesquisa_view(request, material_id) :
     context = {'material_filtrado': material_id,}
     return render(request, 'estoque/estoque_pesquisa.html', context)
+
+def estoque_adicionar_view(request) :
+    if request.method == 'POST':
+        if request.POST.get("registrar_material") == "registrar_material":
+                material = request.POST.get('material')
+                quantidade = request.POST.get('quantidade')
+                preco = request.POST.get('preco')
+                date_added = request.POST.get('date_added')
+
+                m = Material(
+                    material = material,
+                    quantidade = quantidade,
+                    preco = preco,
+                    date_added = date_added,
+                )
+
+                m.save()
+        
+        return redirect('estoque')
+            
+    context = {}
+    return render(request, 'estoque/estoque_adicionar.html', context)
